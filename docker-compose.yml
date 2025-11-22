@@ -1,0 +1,15 @@
+services:
+  db:
+    container_name: postgres
+    image: postgres:latest
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_USER=sync_user
+      - POSTGRES_PASSWORD=sync_password
+      - POSTGRES_DB=syncus_db
+    ports:
+      - 5432:5432
+
+volumes:
+  postgres_data:
