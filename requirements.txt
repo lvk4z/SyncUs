@@ -7,3 +7,6 @@ python-multipart
 pytest
 httpx
 ruff
+email-validator
+passlib[bcrypt]
+python-jose[cryptography]
