@@ -1,9 +1,9 @@
-from typing import Optional, List, TYPE_CHECKING
+from typing import Optional, List
 from sqlmodel import SQLModel, Field, Relationship
 
-if TYPE_CHECKING:
-    from app.models.pair import Pair
-    from app.models.event import Event
+from app.models.link import UserPairLink
+from app.models.event import Event
+from app.models.pair import Pair
 
 class UserBase(SQLModel):
     email: str = Field(unique=True, index=True)
@@ -14,8 +14,10 @@ class User(UserBase, table=True):
     id: Optional[int] = Field(default=None, primary_key=True)
     google_token: Optional[str] = Field(default=None)
     password: str
-    pair_id: Optional[int] = Field(default=None, foreign_key="pair.id")
-    pair: Optional["Pair"] = Relationship(back_populates="users")
+    pairs: List["Pair"] = Relationship(
+        back_populates="users",
+        link_model=UserPairLink
+    )
     events: List["Event"] = Relationship(back_populates="user")
  
 class UserCreate(UserBase):
@@ -26,4 +28,3 @@ class UserLogin(UserBase):
 
 class UserRead(UserBase):
     id: int
-    pair_id: Optional[int]

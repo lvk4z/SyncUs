@@ -14,3 +14,12 @@ class Event(EventBase, table=True):
     id: Optional[int] = Field(default=None, primary_key=True)
     user_id: int = Field(foreign_key="user.id")
     user: "User" = Relationship(back_populates="events")
+
+class CalendarEventOutput(SQLModel):
+    id: str
+    title: str
+    start: datetime
+    end: datetime
+    source: str
+    color: str
+    description: Optional[str] = None

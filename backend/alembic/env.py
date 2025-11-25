@@ -9,7 +9,7 @@ from alembic import context
 
 from sqlmodel import SQLModel
 from app.core.config import settings
-from app.models import user, pair, event
+from app.models import user, pair, event, link
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
